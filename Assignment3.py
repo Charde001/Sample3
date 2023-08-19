@@ -10,6 +10,7 @@ def generate_normal_distribution(mean, std, n):
 
 # Function to plot the histogram of a normal distribution
 def plot_histogram(data):
+  print(data)
   st.barplot(data)
 
 # Function to download the generated data as a .csv file
