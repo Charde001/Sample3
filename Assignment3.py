@@ -1,52 +1,42 @@
+mport streamlit as st
 import numpy as np
-import matplotlib.pyplot as plt
-import streamlit as st
-
 import pandas as pd
+import random
 
-st.title("This is My App")
+# Function to generate a normal distribution
+def generate_normal_distribution(mean, std, n):
+  data = np.random.normal(mean, std, n)
+  return data
 
-uploaded_file = st.file_uploader("upload file", type={"csv", "txt"})
+# Function to plot the histogram of a normal distribution
+def plot_histogram(data):
+  st.barplot(data)
 
-if uploaded_file is not None:
+# Function to download the generated data as a .csv file
+def download_data(data):
+  df = pd.DataFrame(data)
+  df.to_csv('normal_distribution.csv', index=False)
 
-    df = pd.read_csv(uploaded_file)
+# Main function
+def main():
+  # Set the title of the app
+  st.title('Normal Distribution App')
 
-    st.write(df)
+  # Inputs
+  mean = st.slider('Mean', 0, 100, 50)
+  std = st.slider('Standard deviation', 0, 10, 2)
+  n = st.slider('Number of samples', 10, 1000, 100)
 
-# Set the page title
-st.set_page_config(page_title="Normal Distribution App")
+  # Generate the normal distribution
+  data = generate_normal_distribution(mean, std, n)
 
-# App title
-st.title("Normal Distribution Generator")
+  # Plot the histogram of the normal distribution
+  if st.button('Plot histogram'):
+    plot_histogram(data)
 
-# Sidebar for user input
-st.sidebar.header("Input Parameters")
+  # Download the generated data as a .csv file
+  if st.button('Download data'):
+    download_data(data)
 
-mean = st.sidebar.number_input("Mean", value=0.0)
-std_dev = st.sidebar.number_input("Standard Deviation", value=1.0)
-num_samples = st.sidebar.number_input("Number of Samples", value=100)
-
-# Generate random data
-np.random.seed(42)  # Set seed for reproducibility
-data = np.random.normal(mean, std_dev, num_samples)
-
-# Histogram
-st.header("Histogram")
-plt.hist(data, bins='auto', color='blue', alpha=0.7)
-plt.xlabel("Value")
-plt.ylabel("Frequency")
-st.pyplot(plt)
-
-# Download data as CSV
-if st.button("Download Data as CSV"):
-    df = pd.DataFrame(data, columns=["Generated Data"])
-    csv = df.to_csv(index=False)
-    st.download_button("Download CSV", data=csv, file_name="generated_data.csv", mime="text/csv")
-
-# Information about the data
-st.write("Generated Data Statistics:")
-st.write("- Mean:", np.mean(data))
-st.write("- Standard Deviation:", np.std(data))
-st.write("- Number of Samples:", num_samples)
-
+if __name__ == '__main__':
+  main()
