@@ -1,2 +1,5 @@
 pip==23.2.1
+git add requirements.txt
+git commit -m "Update pip version in requirements"
+git push origin main  # or the appropriate branch
 matpoltlib
