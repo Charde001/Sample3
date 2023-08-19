@@ -25,7 +25,7 @@ def main():
 
   # Inputs
   mean = st.slider('Mean', 0, 100, 50)
-  std = st.slider('Standard deviation', 0, 10, 2)
+  std = st.slider('Standard deviation', 0, 10, 5)
   n = st.slider('Number of samples', 10, 1000, 100)
 
   # Generate the normal distribution
