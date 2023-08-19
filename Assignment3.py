@@ -11,7 +11,7 @@ def generate_normal_distribution(mean, std, n):
 # Function to plot the histogram of a normal distribution
 def plot_histogram(data):
   print(data)
-  st.barplot(data)
+  st.bar_chart(data)
 
 # Function to download the generated data as a .csv file
 def download_data(data):
@@ -39,5 +39,4 @@ def main():
   if st.button('Download data'):
     download_data(data)
 
-if __name__ == '__main__':
-  main()
+main()
