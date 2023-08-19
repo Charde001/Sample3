@@ -1,7 +1,18 @@
-import streamlit as st
-import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import streamlit as st
+
+import pandas as pd
+
+st.title("This is My App")
+
+uploaded_file = st.file_uploader("upload file", type={"csv", "txt"})
+
+if uploaded_file is not None:
+
+    df = pd.read_csv(uploaded_file)
+
+    st.write(df)
 
 # Set the page title
 st.set_page_config(page_title="Normal Distribution App")
